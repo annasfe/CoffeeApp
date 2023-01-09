@@ -3,12 +3,12 @@
     <h2>Pick a favorite:</h2>
     <div id="container-grid">
       <div id="grid">
-        <div v-for="coffee in allCoffees" :key="coffee.name">
+        <div v-for="coffee in allCoffees" :key="coffee.id">
           <img :src="coffee.img" @click="handleClick(coffee)" />
           <h5>{{ coffee.name }} ({{ coffee.price }}€)</h5>
         </div>
       </div>
-      <div id="featured" :class="{ hide: !featuredCoffee.img }">
+      <div id="featured">
         <div>
           <img :src="featuredCoffee.img" />
           <h3>{{ featuredCoffee.name }}</h3>
