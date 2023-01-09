@@ -20,7 +20,6 @@
 //Tell JS where to find the components
 import CoffeeForm from "./components/CoffeeForm.vue";
 import CoffeeView from "./components/CoffeeView.vue";
-import CoffeeData from "./MyData";
 export default {
   name: "App",
 
