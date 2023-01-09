@@ -1,33 +1,36 @@
 <template>
   <div>
     <h2>Pick a favorite:</h2>
+    <label for="filter">Filter</label>
+    <input type="text" v-model="searchTerm" @keyup="filter" />
     <div id="container-grid">
-      <div id="grid">
-        <div v-for="coffee in allCoffees" :key="coffee.id">
-          <img :src="coffee.img" @click="handleClick(coffee)" />
-          <h5>{{ coffee.name }} ({{ coffee.price }}€)</h5>
-        </div>
-      </div>
-      <!-- ToDO: Hide this section when no coffees on the array, and/or show first item as pre-selected featured coffee --->
-      <div id="featured">
-        <div>
-          <img :src="featuredCoffee.img" />
-          <h3>{{ featuredCoffee.name }}</h3>
-        </div>
-      </div>
+      <coffee-grid :coffees="filteredCoffees" @setFeatureEvent="setFeature" />
+      <featured
+        :featuredCoffee="featuredCoffee"
+        :class="{ hide: !featuredCoffee.img }"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import CoffeeGrid from "./CoffeeGrid.vue";
+import Featured from "./Featured.vue";
+
 export default {
   name: "CoffeeView",
+  components: {
+    CoffeeGrid,
+    Featured,
+  },
   data() {
     return {
       featuredCoffee: {
         name: "",
         img: "",
       },
+      searchTerm: "",
+      filteredCoffees: this.allCoffees,
     };
   },
   //data that are passed by parent
@@ -35,11 +38,22 @@ export default {
     allCoffees: Array,
   },
   methods: {
-    handleClick(coffee) {
-      this.featuredCoffee.name = coffee.name;
-      this.featuredCoffee.img = coffee.img;
+    setFeature(coffee) {
+      this.featuredCoffee = coffee;
+    },
+    filter() {
+      this.filteredCoffees = this.allCoffees.filter((item) =>
+        item.name.includes(this.searchTerm)
+      );
     },
   },
+  // computed: {
+  //   filteredCoffees() {
+  //     return this.allCoffees.filter((item) =>
+  //       item.name.includes(this.searchTerm)
+  //     );
+  //   },
+  // },
 };
 </script>
 
@@ -48,20 +62,7 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-}
-
-#grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 180px;
-  gap: 50px;
-}
-
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  cursor: pointer;
+  margin-top: 50px;
 }
 
 .hide {

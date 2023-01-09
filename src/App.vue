@@ -20,6 +20,8 @@
 //Tell JS where to find the components
 import CoffeeForm from "./components/CoffeeForm.vue";
 import CoffeeView from "./components/CoffeeView.vue";
+import MyData from "./MyData";
+
 export default {
   name: "App",
 
@@ -32,8 +34,8 @@ export default {
   //reactive data that when changed will update the View
   data() {
     return {
-      cafeView: false,
-      allCoffees: [],
+      cafeView: true,
+      allCoffees: MyData,
     };
   },
   methods: {
