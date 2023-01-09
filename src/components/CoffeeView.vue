@@ -1,14 +1,11 @@
 <template>
   <div>
-    <h2>Pick a favorite:</h2>
+    <h2>Place your order:</h2>
     <label for="filter">Filter</label>
     <input type="text" v-model="searchTerm" @keyup="filter" />
     <div id="container-grid">
       <coffee-grid :coffees="filteredCoffees" @setFeatureEvent="setFeature" />
-      <featured
-        :featuredCoffee="featuredCoffee"
-        :class="{ hide: !featuredCoffee.img }"
-      />
+      <featured :cart="cart" :class="{ hide: !cart.length }" />
     </div>
   </div>
 </template>
@@ -25,12 +22,9 @@ export default {
   },
   data() {
     return {
-      featuredCoffee: {
-        name: "",
-        img: "",
-      },
       searchTerm: "",
       filteredCoffees: this.allCoffees,
+      cart: [],
     };
   },
   //data that are passed by parent
@@ -39,7 +33,7 @@ export default {
   },
   methods: {
     setFeature(coffee) {
-      this.featuredCoffee = coffee;
+      this.cart.push(coffee);
     },
     filter() {
       this.filteredCoffees = this.allCoffees.filter((item) =>
