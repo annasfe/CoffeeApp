@@ -8,6 +8,7 @@
           <h5>{{ coffee.name }} ({{ coffee.price }}€)</h5>
         </div>
       </div>
+      <!-- ToDO: Hide this section when no coffees on the array, and/or show first item as pre-selected featured coffee --->
       <div id="featured">
         <div>
           <img :src="featuredCoffee.img" />
