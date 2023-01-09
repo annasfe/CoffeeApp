@@ -10,8 +10,8 @@
     </nav>
     <div class="container">
       <h1>My coffee app <span style="font-size: 100px">&#9749;</span></h1>
-      <CoffeeForm :class="{ hide: cafeView }" @add="addCoffee" />
-      <CoffeeView :class="{ hide: !cafeView }" :allCoffees="allCoffees" />
+      <CoffeeForm v-if="!cafeView" @add="addCoffee" />
+      <CoffeeView v-else :allCoffees="allCoffees" />
     </div>
   </main>
 </template>
@@ -34,13 +34,12 @@ export default {
   data() {
     return {
       cafeView: false,
-      allCoffees: CoffeeData,
+      allCoffees: [],
     };
   },
   methods: {
     addCoffee(coffee) {
       this.allCoffees.push(coffee);
-      console.log(this.allCoffees);
       this.cafeView = true;
     },
   },
@@ -64,8 +63,5 @@ h1 {
 
 button {
   margin: 10px;
-}
-.hide {
-  display: none;
 }
 </style>
