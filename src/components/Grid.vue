@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "CoffeeGrid",
+  name: "Grid",
   props: ["coffees"],
   methods: {
     handleClick(coffee) {
