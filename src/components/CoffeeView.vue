@@ -1,10 +1,8 @@
 <template>
   <div>
     <h2>Place your order:</h2>
-    <label for="filter">Filter</label>
-    <input type="text" v-model="searchTerm" @keyup="filter" />
     <div id="container-grid">
-      <coffee-grid :coffees="filteredCoffees" @setFeatureEvent="setFeature" />
+      <coffee-grid :coffees="allCoffees" @setFeatureEvent="setFeature" />
       <featured :cart="cart" :class="{ hide: !cart.length }" />
     </div>
   </div>
@@ -23,7 +21,6 @@ export default {
   data() {
     return {
       searchTerm: "",
-      filteredCoffees: this.allCoffees,
       cart: [],
     };
   },
@@ -35,19 +32,7 @@ export default {
     setFeature(coffee) {
       this.cart.push(coffee);
     },
-    filter() {
-      this.filteredCoffees = this.allCoffees.filter((item) =>
-        item.name.includes(this.searchTerm)
-      );
-    },
   },
-  // computed: {
-  //   filteredCoffees() {
-  //     return this.allCoffees.filter((item) =>
-  //       item.name.includes(this.searchTerm)
-  //     );
-  //   },
-  // },
 };
 </script>
 
