@@ -19,7 +19,7 @@ export default {
       coffeeName: "",
       coffeeImg: "",
       coffeePrice: 0,
-      id: 0,
+      id: 7,
     };
   },
   //data that are passed by parent

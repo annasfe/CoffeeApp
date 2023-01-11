@@ -3,25 +3,25 @@
     <h2>Place your order:</h2>
     <div id="container-grid">
       <coffee-grid :coffees="allCoffees" @setFeatureEvent="setFeature" />
-      <featured :cart="cart" :class="{ hide: !cart.length }" />
+      <Cart :chosenItems="chosenItems" :class="{ hide: !chosenItems.length }" />
     </div>
   </div>
 </template>
 
 <script>
 import CoffeeGrid from "./CoffeeGrid.vue";
-import Featured from "./Featured.vue";
+import Cart from "./Cart.vue";
 
 export default {
   name: "CoffeeView",
   components: {
     CoffeeGrid,
-    Featured,
+    Cart,
   },
   data() {
     return {
       searchTerm: "",
-      cart: [],
+      chosenItems: [],
     };
   },
   //data that are passed by parent
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     setFeature(coffee) {
-      this.cart.push(coffee);
+      this.chosenItems.push(coffee);
     },
   },
 };

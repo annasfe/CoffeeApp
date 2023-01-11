@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       cafeView: true,
-      allCoffees: MyData,
+      allCoffees: [],
     };
   },
   methods: {
@@ -43,6 +43,10 @@ export default {
       this.allCoffees.push(coffee);
       this.cafeView = true;
     },
+  },
+  //lifecycle hook, load the external data only once, when component is created
+  created() {
+    this.allCoffees = MyData;
   },
 };
 </script>
